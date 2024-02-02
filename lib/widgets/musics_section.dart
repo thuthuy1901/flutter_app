@@ -27,14 +27,13 @@ class MusicsSectionState extends State<MusicsSection> {
   @override
   void initState() {
     super.initState();
-    _handleSelectImage(selectMusics);
-    print(images);
+    selectImages(selectMusics);
   }
 
   @override
   void didUpdateWidget(covariant MusicsSection oldWidget) {
     selectMusics = widget.data;
-    _handleSelectImage(selectMusics);
+    selectImages(selectMusics);
     if (valueSearch != "") {
       List<String> tempList = images;
       images = tempList
@@ -45,7 +44,7 @@ class MusicsSectionState extends State<MusicsSection> {
     valueSearch = "";
   }
 
-  _handleSelectImage(select) {
+  selectImages(select) {
     images.clear();
     for (String selectMusic in selectMusics) {
       MusicType selectMusicTypes =
@@ -75,15 +74,15 @@ class MusicsSectionState extends State<MusicsSection> {
     );
   }
 
-  updateValue(bool newValue) {
+  showFull(bool newValue) {
     setState(() {
       isShowFull = newValue;
     });
   }
 
-  updateImage(String search) {
+  updateImage(String searchValue) {
     setState(() {
-      valueSearch = search;
+      valueSearch = searchValue;
     });
   }
 

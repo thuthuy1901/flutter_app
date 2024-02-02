@@ -1,26 +1,25 @@
 import 'package:app_ex/constants.dart';
-import 'package:app_ex/widdgets/drawer_section.dart';
-import 'package:app_ex/widdgets/musics_section.dart';
+import 'package:app_ex/widgets/drawer_section.dart';
+import 'package:app_ex/widgets/musics_section.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _HomeScreen();
+    return HomeScreenStatus();
   }
 }
 
 //tt
-class _HomeScreen extends State<HomeScreen>
+class HomeScreenStatus extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   bool isSearching = false;
   String searchTerm = "";
 
-  List<String> filteredList = [];
-  final _showFull = GlobalKey<MusicsSectionState>();
+  final _key = GlobalKey<MusicsSectionState>();
 
   List<String> musicTypeNames = [all.name, silent.name, energy.name];
   List<String> selectTypeNames = [silent.name, energy.name];
@@ -32,11 +31,11 @@ class _HomeScreen extends State<HomeScreen>
       vsync: this,
       initialIndex: 0,
     );
-    _tabController.addListener(_handleTabSection);
+    _tabController.addListener(handleTabSection);
     super.initState();
   }
 
-  _handleTabSection() {
+  handleTabSection() {
     if (_tabController.indexIsChanging) {
       changeDataTab();
     }
@@ -58,11 +57,11 @@ class _HomeScreen extends State<HomeScreen>
       isSearching = !isSearching;
     });
     _tabController.index = 0;
-    _showFull.currentState?.updateValue(true);
+    _key.currentState?.showFull(true);
   }
 
-  void filterList() {
-    _showFull.currentState?.updateImage(searchTerm);
+  filterList() {
+    _key.currentState?.updateImage(searchTerm);
   }
 
   @override
@@ -161,7 +160,7 @@ class _HomeScreen extends State<HomeScreen>
           Center(
             child: [
               for (int i = 0; i < musicTypeNames.length; i++)
-                MusicsSection(data: selectTypeNames, key: _showFull),
+                MusicsSection(data: selectTypeNames, key: _key),
             ][_tabController.index],
           ),
         ],

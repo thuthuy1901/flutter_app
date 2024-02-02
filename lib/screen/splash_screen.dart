@@ -11,11 +11,11 @@ class SplashScreen extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _SplashScreen();
+    return SplashScreenStatus();
   }
 }
 
-class _SplashScreen extends State<SplashScreen> {
+class SplashScreenStatus extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
