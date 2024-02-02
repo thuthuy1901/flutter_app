@@ -3,6 +3,7 @@ import 'package:app_ex/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  //test commit code
   runApp(MyApp());
 }
 
